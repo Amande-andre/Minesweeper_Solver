@@ -1,4 +1,7 @@
 function IamBored() {
+  if (window.game.populated && !window.game.mleft){
+    NewGame();
+  }  
   if (!window.game.populated) {
     NewGame();
     requestuncover(0); // Triger AJAX, we must wait the populate
@@ -22,6 +25,5 @@ function solveGame() {
       uncover(i);
     }
   }
-  NewGame();
   console.log("Such a lazy person...");
 }
