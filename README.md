@@ -16,16 +16,19 @@ A browser console script to automatically reveal all safe cells on [démineur.eu
 
 ```js
 function IamBored() {
+  if (window.game.populated && !window.game.mleft){
+    NewGame();
+  }  
   if (!window.game.populated) {
     NewGame();
-    requestuncover(0); // triggers field generation (AJAX call)
-
+    requestuncover(0); // Triger AJAX, we must wait the populate
+    
     const wait = setInterval(() => {
       if (window.game.populated) {
         clearInterval(wait);
         solveGame();
       }
-    }, 100); // checks every 100ms until the field is ready
+    }, 100);
   } else {
     solveGame();
   }
@@ -39,7 +42,7 @@ function solveGame() {
       uncover(i);
     }
   }
-  console.log("✅ Board solved!");
+  console.log("Such a lazy person...");
 }
 
 IamBored();
